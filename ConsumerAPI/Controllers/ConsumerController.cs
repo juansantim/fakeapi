@@ -13,7 +13,8 @@ namespace ConsumerAPI.Controllers
 
         [HttpGet(Name = "GetClients")]
 
-        public ResultSet Get(string managedIdentityClientId)
+        public ResultSet Get(string managedIdentityClientId = "e1ff786b-419f-42b4-9678-ae50292faed9",
+            string appId = "ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd")
         {
             ResultSet result = new ResultSet();
 
@@ -23,7 +24,7 @@ namespace ConsumerAPI.Controllers
 
             try
             {
-                (token, clientId) = GenerateToken(managedIdentityClientId);
+                (token, clientId) = GenerateToken(managedIdentityClientId, appId);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 var clients = client.GetAsync("https://jsprotectedapi.azurewebsites.net/api/Clients").Result;
@@ -41,12 +42,21 @@ namespace ConsumerAPI.Controllers
             return result;
         }
 
-        private (string token, string clientID) GenerateToken(string managedIdentityClientId)
+        //[HttpGet(Name = "GetToken")]
+        //public string GetToken(string managedIdentityClientId = "e1ff786b-419f-42b4-9678-ae50292faed9",
+        //    string appId = "ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd")
+        //{
+        //    var (token, _) = GenerateToken(managedIdentityClientId, appId);
+
+        //    return token;
+        //}
+
+        private (string token, string clientID) GenerateToken(string managedIdentityClientId,string appId)
         {
             DefaultAzureCredential credential = string.IsNullOrEmpty(managedIdentityClientId) ? new DefaultAzureCredential() :
                 new DefaultAzureCredential(new DefaultAzureCredentialOptions { ManagedIdentityClientId = managedIdentityClientId });
 
-            var context = new TokenRequestContext(new string[] { "ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd/.default" });
+            var context = new TokenRequestContext(new string[] { $"{appId}/.default" });
 
             var accesToken = credential.GetTokenAsync(context).Result;
 
