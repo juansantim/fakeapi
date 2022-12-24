@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace FakeApi.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]    
+    [ApiController]
+    [Authorize(Roles = "consumer_role")]
     public class ClientsController : ControllerBase
     {
 
@@ -30,5 +31,13 @@ namespace FakeApi.Controllers
 
             return clients;
         }
+
+        [Route("GetIdentiy")]
+        protected string GetIDentity() 
+        {
+            return this.GetIDentity();
+        }
     }
+
+
 }

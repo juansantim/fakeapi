@@ -1,6 +1,5 @@
 using Azure.Core;
 using Azure.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
@@ -13,7 +12,7 @@ namespace ConsumerAPI.Controllers
 
         [HttpGet(Name = "GetClients")]
 
-        public ResultSet Get(string managedIdentityClientId)
+        public ResultSet Get(string managedIdentityClientId = "e1ff786b-419f-42b4-9678-ae50292faed9")
         {
             ResultSet result = new ResultSet();
 
@@ -46,7 +45,7 @@ namespace ConsumerAPI.Controllers
             DefaultAzureCredential credential = string.IsNullOrEmpty(managedIdentityClientId) ? new DefaultAzureCredential() :
                 new DefaultAzureCredential(new DefaultAzureCredentialOptions { ManagedIdentityClientId = managedIdentityClientId });
 
-            var context = new TokenRequestContext(new string[] { "ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd/.default" });
+            var context = new TokenRequestContext(new string[] { "api://ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd/.default" });
 
             var accesToken = credential.GetTokenAsync(context).Result;
 
