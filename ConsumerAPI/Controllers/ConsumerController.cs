@@ -41,14 +41,6 @@ namespace ConsumerAPI.Controllers
             return result;
         }
 
-        //[HttpGet(Name = "GetToken")]
-        //public string GetToken(string managedIdentityClientId = "e1ff786b-419f-42b4-9678-ae50292faed9",
-        //    string appId = "ae4aeb26-4d3e-4d33-9daf-f58ea6f262dd")
-        //{
-        //    var (token, _) = GenerateToken(managedIdentityClientId, appId);
-
-        //    return token;
-        //}
 
         private (string token, string clientID) GenerateToken(string managedIdentityClientId,string appId)
         {

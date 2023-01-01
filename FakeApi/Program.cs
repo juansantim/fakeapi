@@ -1,8 +1,8 @@
-
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,10 +13,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+*/
+var Configuration = builder.Configuration;
+var issuer = string.Format($"{Configuration["AzureAd:Instance"]}65f72790-9760-45ec-b66c-7176cebdde18/");
 
-IdentityModelEventSource.ShowPII = true;
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,                
+                ValidIssuer = issuer,
+                ValidAudience = Configuration["AzureAd:Audience"] ,
+                
+        };
+        options.RequireHttpsMetadata = false;
+        });
+
+//IdentityModelEventSource.ShowPII = true;
 
 var app = builder.Build();
 
