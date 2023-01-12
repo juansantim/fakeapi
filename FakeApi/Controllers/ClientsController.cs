@@ -1,9 +1,9 @@
-﻿using FakeApi.Model;
+﻿using ProtectedApi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FakeApi.Controllers
+namespace ProtectedApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

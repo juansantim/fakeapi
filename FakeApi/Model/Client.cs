@@ -1,4 +1,4 @@
-﻿namespace FakeApi.Model
+﻿namespace ProtectedApi.Model
 {
     public class Client
     {

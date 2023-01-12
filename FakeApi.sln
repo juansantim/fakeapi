@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeApi", "FakeApi\FakeApi.csproj", "{9810EB9D-3333-4230-9125-6EC6CB9CA680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtectedAPI", "FakeApi\ProtectedAPI.csproj", "{9810EB9D-3333-4230-9125-6EC6CB9CA680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerAPI", "ConsumerAPI\ConsumerAPI.csproj", "{BC7626B6-A554-40E1-A315-379FB03D9BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerAPI", "ConsumerAPI\ConsumerAPI.csproj", "{BC7626B6-A554-40E1-A315-379FB03D9BB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
